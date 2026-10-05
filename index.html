@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-CN" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fafafa" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#12121a" />
+    <meta property="og:locale" content="zh_CN" />
+    <meta property="og:image" content="/logo.png" />
+    <meta property="og:image:alt" content="Web-Check 标志" />
+    <title>Web-Check · 全面、按需的开源情报（OSINT）收集</title>
+    <meta
+      name="description"
+      content="Web-Check 是一款开源工具，可对任意网站进行全面、按需的开源情报（OSINT）收集：发现潜在攻击向量、分析服务器架构、查看安全配置，并了解网站所使用的技术栈。"
+    />
+    <meta name="keywords" content="Web-Check,OSINT,网站安全检查,技术栈检测,开源情报,网络安全工具" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Web-Check · 全面、按需的开源情报（OSINT）收集" />
+    <meta
+      property="og:description"
+      content="深入了解任意网站的内部运作：发现潜在的攻击向量、分析服务器架构、查看安全配置，并了解网站所使用的技术栈。"
+    />
+    <link rel="canonical" href="https://web-check.xyz/" />
+    <script>
+      ;(() => {
+        try {
+          const saved = localStorage.getItem('web-check-theme')
+          const dark = saved
+            ? saved === 'dark'
+            : window.matchMedia('(prefers-color-scheme: dark)').matches
+          document.documentElement.classList.toggle('dark', dark)
+        } catch {
+          /* 忽略隐私模式下的存储异常 */
+        }
+      })()
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
