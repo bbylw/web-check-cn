@@ -46,7 +46,7 @@ export function SiteFooter() {
               className="text-muted-foreground hover:text-foreground inline-flex items-center gap-2 transition-colors"
             >
               <GithubIcon className="size-4" />
-              GitHub 仓库
+              GitHub
             </a>
             <a
               href={site.mirror}
