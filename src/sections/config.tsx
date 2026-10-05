@@ -2,16 +2,20 @@ import { AlertTriangle } from 'lucide-react'
 import { CopyButton } from '@/components/copy-button'
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { cn } from '@/lib/utils'
 import { apiKeyRows, configRows, type ConfigRow } from '@/lib/site-data'
 
 /** API 密钥：卡片网格而非表格行，避免 7 行同构描边 */
 function KeyCards({ rows }: { rows: ConfigRow[] }) {
   return (
-    <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-      {rows.map((row) => (
+    <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      {rows.map((row, i) => (
         <div
           key={row.key}
-          className="bg-card group flex flex-col gap-3 rounded-xl border p-5 transition-shadow hover:shadow-md"
+          className={cn(
+            'bg-card group flex flex-col gap-3 rounded-xl border p-5 transition-shadow hover:shadow-md',
+            i === 0 && 'bg-accent/35 sm:col-span-2',
+          )}
         >
           <div className="flex items-start justify-between gap-2">
             <code className="text-primary font-mono text-xs leading-relaxed font-medium break-all">

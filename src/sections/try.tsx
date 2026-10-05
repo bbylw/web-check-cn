@@ -1,8 +1,8 @@
 import { useMemo, useRef, useState, type FormEvent } from 'react'
-import { Globe, RotateCcw, Search } from 'lucide-react'
+import { Check, Globe, RotateCcw, Search } from 'lucide-react'
 import { Section, SectionHeading } from '@/components/section'
 import { Button } from '@/components/ui/button'
-import { featureGroups, site } from '@/lib/site-data'
+import { featureGroups, site, totalChecks } from '@/lib/site-data'
 import { cn } from '@/lib/utils'
 
 const examples = ['github.com', 'vercel.com', 'wikipedia.org']
@@ -66,8 +66,6 @@ export function Try() {
   return (
     <Section id="try">
       <SectionHeading
-        index="03"
-        kicker="体验"
         title="先看看它会查什么"
         description="输入任意域名，这里会列出 Web-Check 将为它运行的检查计划。真实扫描请前往官方在线演示。"
       />
@@ -173,7 +171,7 @@ export function Try() {
             <div className="text-muted-foreground flex min-h-64 flex-col items-center justify-center gap-3 py-10 text-center">
               <Search className="size-6 opacity-50" />
               <p className="max-w-[34ch] text-sm leading-relaxed">
-                在左侧输入域名，这里会展示四个分类、27 项检查的执行计划。
+                输入域名后，这里会展示 {featureGroups.length} 个分类、{totalChecks} 项检查的执行计划。
               </p>
             </div>
           ) : (
@@ -181,7 +179,7 @@ export function Try() {
               <div className="flex flex-wrap items-baseline justify-between gap-2 border-b pb-4">
                 <p className="font-mono text-sm font-medium break-all">{submitted}</p>
                 <p className="text-muted-foreground font-mono text-xs tabular-nums">
-                  共 27 项检查
+                  共 {totalChecks} 项检查
                 </p>
               </div>
 
@@ -197,8 +195,8 @@ export function Try() {
                   </div>
                   <ul className="flex flex-col gap-1.5">
                     {group.sample.map((item) => (
-                      <li key={item} className="flex items-center gap-2.5 text-sm">
-                        <span className="bg-primary size-1.5 shrink-0 rounded-full" />
+                      <li key={item} className="flex items-start gap-2.5 text-sm">
+                        <Check className="text-primary mt-0.5 size-3.5 shrink-0" strokeWidth={2.5} />
                         <span className="text-muted-foreground">{item}</span>
                       </li>
                     ))}

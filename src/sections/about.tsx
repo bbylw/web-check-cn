@@ -1,4 +1,5 @@
 import { Bug, Server, ShieldCheck } from 'lucide-react'
+import { Reveal } from '@/components/reveal'
 import { Section, SectionHeading } from '@/components/section'
 import { site } from '@/lib/site-data'
 
@@ -32,8 +33,6 @@ export function About() {
       <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
         <div className="lg:sticky lg:top-28 lg:self-start">
           <SectionHeading
-            index="01"
-            kicker="关于"
             title="深入了解任意网站的内部运作"
             description="我们的目标是帮助你轻松理解、优化并保护自己的网站。Web-Check 把散落在十几个外部数据源里的判断，收敛成一份可读的结构化报告。"
           />
@@ -58,23 +57,21 @@ export function About() {
         <ol className="border-border border-t">
           {valueProps.map((item, i) => (
             <li key={item.title} className="border-border group border-b">
-              <div className="grid grid-cols-[auto_1fr] gap-x-5 gap-y-3 py-7 sm:grid-cols-[auto_1fr_auto] sm:items-baseline sm:gap-x-8 sm:py-9">
-                <span className="text-primary font-mono text-xs tabular-nums">
-                  {String(i + 1).padStart(2, '0')}
-                </span>
+              <Reveal delay={i * 70}>
+                <div className="grid grid-cols-[auto_1fr] gap-x-5 gap-y-3 py-7 sm:items-baseline sm:gap-x-8 sm:py-9">
+                  <span className="text-primary font-mono text-xs tabular-nums">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
 
-                <div className="flex flex-col gap-2.5">
-                  <h3 className="font-heading flex items-center gap-2.5 text-xl font-medium tracking-tight sm:text-2xl">
-                    <item.icon className="text-primary size-5 shrink-0" strokeWidth={1.75} />
-                    {item.title}
-                  </h3>
-                  <p className="text-muted-foreground max-w-[52ch] leading-relaxed">{item.description}</p>
+                  <div className="flex flex-col gap-2.5">
+                    <h3 className="font-heading flex items-center gap-2.5 text-xl font-medium tracking-tight sm:text-2xl">
+                      <item.icon className="text-primary size-5 shrink-0" strokeWidth={1.75} />
+                      {item.title}
+                    </h3>
+                    <p className="text-muted-foreground max-w-[52ch] leading-relaxed">{item.description}</p>
+                  </div>
                 </div>
-
-                <span className="text-muted-foreground/50 font-mono text-xs tabular-nums sm:text-right">
-                  {String(i + 1).padStart(2, '0')} / {String(valueProps.length).padStart(2, '0')}
-                </span>
-              </div>
+              </Reveal>
             </li>
           ))}
         </ol>

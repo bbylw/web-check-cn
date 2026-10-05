@@ -1,6 +1,6 @@
 import { GithubIcon } from '@/components/github-icon'
 import { Button } from '@/components/ui/button'
-import { site } from '@/lib/site-data'
+import { deployOptions, site, totalChecks } from '@/lib/site-data'
 
 export function Hero() {
   return (
@@ -59,10 +59,10 @@ export function Hero() {
             </div>
             <div className="bg-background relative h-[22rem] overflow-hidden sm:h-[26rem] lg:h-[30rem]">
               <img
-                src="https://raw.githubusercontent.com/Lissy93/web-check/master/.github/screenshots/web-check-screenshot1.png"
+                src="/screenshots/dashboard.webp"
                 alt="Web-Check 实际运行界面：服务器位置、SSL 证书、DNS 记录、技术栈等检查结果"
-                width={1200}
-                height={2400}
+                width={1475}
+                height={2200}
                 fetchPriority="high"
                 decoding="async"
                 className="absolute inset-x-0 top-0 w-full object-cover object-top"
@@ -72,8 +72,8 @@ export function Hero() {
 
             <dl className="bg-muted/60 grid grid-cols-3 divide-x divide-border border-t">
               {[
-                { value: '27', label: '项内置检查' },
-                { value: '6', label: '种部署方式' },
+                { value: String(totalChecks), label: '项内置检查' },
+                { value: String(deployOptions.length), label: '种部署方式' },
                 { value: 'MIT', label: '开源许可' },
               ].map((stat) => (
                 <div key={stat.label} className="flex flex-col items-center gap-0.5 px-2 py-3">

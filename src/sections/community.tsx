@@ -16,8 +16,6 @@ export function Community() {
   return (
     <Section id="community" ruled>
       <SectionHeading
-        index="06"
-        kicker="社区"
         title="与维护者和使用者一起完善它"
         description="Web-Check 始终保持 100% 免费且开源。贡献代码、反馈问题或分担托管成本，都能让更多人免费使用。"
       />

@@ -1,8 +1,9 @@
-import { Check, Layers, Server, ShieldCheck, TrendingUp } from 'lucide-react'
+import { ArrowUpRight, Check, Layers, Server, ShieldCheck, TrendingUp } from 'lucide-react'
 import { RemoteImage } from '@/components/remote-image'
+import { Reveal } from '@/components/reveal'
 import { Section, SectionHeading } from '@/components/section'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { featureGroups, screenshots, site } from '@/lib/site-data'
+import { featureGroups, screenshots, site, totalChecks } from '@/lib/site-data'
 
 const icons = {
   server: Server,
@@ -53,8 +54,6 @@ export function Features() {
   return (
     <Section id="features" ruled>
       <SectionHeading
-        index="02"
-        kicker="功能"
         title="按需收集，输出结构化情报"
         description="每个检查项都可单独开关与排序。完整清单及各项检查的具体作用，见下方与官方检查项说明页。"
       />
@@ -72,10 +71,10 @@ export function Features() {
               const Icon = icons[group.icon as keyof typeof icons] ?? Layers
               const cell = cells[index]
               return (
-                <article
-                  key={group.category}
-                  className={`${cell.span} ${cell.tone} relative overflow-hidden rounded-xl border p-6 sm:p-7`}
-                >
+                <Reveal key={group.category} className={`${cell.span} h-full`} delay={i * 70}>
+                  <article
+                    className={`${cell.tone} relative h-full overflow-hidden rounded-xl border p-6 sm:p-7`}
+                  >
                   {cell.detail === 'hatch' ? (
                     <div className="hatch pointer-events-none absolute inset-y-0 right-0 w-28 opacity-50" />
                   ) : null}
@@ -98,7 +97,8 @@ export function Features() {
                       </li>
                     ))}
                   </ul>
-                </article>
+                  </article>
+                </Reveal>
               )
             })}
 
@@ -110,10 +110,11 @@ export function Features() {
               className="group bg-primary text-primary-foreground hover:bg-primary/90 flex flex-col justify-between gap-6 rounded-xl p-6 transition-colors sm:p-7 lg:col-span-12 lg:flex-row lg:items-center"
             >
               <span className="font-heading text-xl font-medium tracking-tight sm:text-2xl">
-                27 项检查的完整说明与输出格式
+                {totalChecks} 项检查的完整说明与输出格式
               </span>
               <span className="inline-flex items-center gap-2 text-sm font-medium">
                 查看完整清单
+                <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </span>
             </a>
           </div>

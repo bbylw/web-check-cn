@@ -1,42 +1,33 @@
 import type { ReactNode } from 'react'
+import { useInView } from '@/lib/use-in-view'
 import { cn } from '@/lib/utils'
 
 type SectionHeadingProps = {
-  /** 小节序号，如 "02"。用于左侧标尺，而非 eyebrow 标签 */
-  index?: string
-  /** 小节英文/分类标签，右上角，与序号同行 */
-  kicker?: string
   title: ReactNode
   description?: ReactNode
   className?: string
 }
 
-export function SectionHeading({ index, kicker, title, description, className }: SectionHeadingProps) {
+export function SectionHeading({ title, description, className }: SectionHeadingProps) {
+  const { ref, inView } = useInView<HTMLDivElement>()
   return (
-    <div className={cn('flex flex-col gap-5', className)}>
-      <div className="flex max-w-3xl flex-col gap-4">
-        <div className="flex items-center gap-3">
-          {index ? (
-            <span className="text-primary font-mono text-xs font-medium tabular-nums">
-              {index}
-            </span>
-          ) : null}
-          {index ? <span className="bg-border h-px w-6" /> : null}
-          {kicker ? (
-            <span className="text-muted-foreground font-mono text-xs">{kicker}</span>
-          ) : null}
-        </div>
+    <div
+      ref={ref}
+      className={cn(
+        'reveal flex max-w-3xl flex-col gap-4',
+        inView && 'reveal-shown',
+        className,
+      )}
+    >
+      <h2 className="font-heading text-3xl leading-[1.15] font-semibold tracking-tighter text-balance sm:text-4xl lg:text-[2.75rem]">
+        {title}
+      </h2>
 
-        <h2 className="font-heading text-3xl leading-[1.15] font-semibold tracking-tighter text-balance sm:text-4xl lg:text-[2.75rem]">
-          {title}
-        </h2>
-
-        {description ? (
-          <p className="text-muted-foreground max-w-[62ch] text-base leading-relaxed text-pretty sm:text-lg">
-            {description}
-          </p>
-        ) : null}
-      </div>
+      {description ? (
+        <p className="text-muted-foreground max-w-[62ch] text-base leading-relaxed text-pretty sm:text-lg">
+          {description}
+        </p>
+      ) : null}
     </div>
   )
 }

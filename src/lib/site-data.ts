@@ -135,6 +135,8 @@ export const featureGroups: FeatureGroup[] = [
   },
 ]
 
+export const totalChecks = featureGroups.reduce((sum, group) => sum + group.items.length, 0)
+
 export type DeployOption = {
   id: string
   index: number
@@ -186,7 +188,7 @@ export const deployOptions: DeployOption[] = [
     name: 'Hostinger',
     platform: 'Hostinger',
     brand: 'hostinger',
-    description: '在 Hostinger 上一键部署 Web-Check —— 已预先配置好，开箱即用。',
+    description: '在 Hostinger 上一键部署 Web-Check，已预先配置好，开箱即用。',
     action: '在 Hostinger 上部署',
     href: 'https://www.hostg.xyz/aff_c?offer_id=48&aff_id=243972&url_id=6826',
   },
@@ -378,12 +380,12 @@ export type Screenshot = {
 
 export const screenshots: [Screenshot, Screenshot] = [
   {
-    src: 'https://raw.githubusercontent.com/Lissy93/web-check/master/.github/screenshots/web-check-screenshot1.png',
+    src: '/screenshots/dashboard.webp',
     alt: 'Web-Check 主界面：服务器位置、SSL 证书、DNS 记录与技术栈检查',
     href: 'https://web-check.as93.net/',
   },
   {
-    src: 'https://i.ibb.co/r0jXN6s/web-check.png',
+    src: '/screenshots/results.webp',
     alt: 'Web-Check 检查结果截图',
     href: 'https://github.com/Lissy93/web-check/tree/master/.github/screenshots',
   },

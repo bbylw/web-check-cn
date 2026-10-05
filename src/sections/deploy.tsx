@@ -1,22 +1,31 @@
-import { useState } from 'react'
+import { siDocker, siGit, siHostinger, siNetlify, siRender, siVercel } from 'simple-icons'
+import { Reveal } from '@/components/reveal'
 import { Section, SectionHeading } from '@/components/section'
 import { Button } from '@/components/ui/button'
 import { deployOptions } from '@/lib/site-data'
 
+const brandIcons: Record<string, { path: string }> = {
+  netlify: siNetlify,
+  vercel: siVercel,
+  hostinger: siHostinger,
+  render: siRender,
+  docker: siDocker,
+  git: siGit,
+}
+
+/** 内联品牌图标：无 CDN 依赖，currentColor 自动适配明暗主题。 */
 function BrandMark({ slug }: { slug: string }) {
-  const [failed, setFailed] = useState(false)
-  if (failed) return null
+  const icon = brandIcons[slug]
+  if (!icon) return null
   return (
-    <img
-      src={`https://cdn.simpleicons.org/${slug}/64748b`}
-      alt=""
+    <svg
+      viewBox="0 0 24 24"
+      fill="currentColor"
       aria-hidden="true"
-      width={18}
-      height={18}
-      loading="lazy"
-      onError={() => setFailed(true)}
-      className="size-[18px] shrink-0"
-    />
+      className="text-muted-foreground size-[18px] shrink-0"
+    >
+      <path d={icon.path} />
+    </svg>
   )
 }
 
@@ -24,18 +33,17 @@ export function Deploy() {
   return (
     <Section id="deploy">
       <SectionHeading
-        index="04"
-        kicker="部署"
         title="六种方式，挑一种开始部署"
         description="Web-Check 无需任何配置即可运行，多数平台支持一键完成。"
       />
 
       <ol className="mt-12 border-t">
-        {deployOptions.map((option) => {
+        {deployOptions.map((option, i) => {
           const external = option.href.startsWith('http')
           return (
             <li key={option.id} className="border-border group border-b">
-              <div className="grid gap-4 py-6 sm:grid-cols-[3.5rem_1fr_auto] sm:items-center sm:gap-x-8 lg:py-7">
+              <Reveal delay={i * 60}>
+                <div className="grid gap-4 py-6 sm:grid-cols-[3.5rem_1fr_auto] sm:items-center sm:gap-x-8 lg:py-7">
                 <span className="text-muted-foreground font-mono text-xs tabular-nums">
                   {String(option.index).padStart(2, '0')}
                 </span>
@@ -76,7 +84,8 @@ export function Deploy() {
                     </Button>
                   )}
                 </div>
-              </div>
+                </div>
+              </Reveal>
             </li>
           )
         })}

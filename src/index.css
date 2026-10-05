@@ -200,6 +200,23 @@
   }
 }
 
+/* 滚动入场（IntersectionObserver 驱动，一次性）。
+   初始隐藏态仅在 no-preference 下生效：reduced-motion 或无 JS 时内容始终可见。 */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0);
+    transition:
+      opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .reveal-shown {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .enter {
     animation: rise-in 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
